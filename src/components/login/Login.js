@@ -50,7 +50,6 @@ const Login = () => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="abc@gmail.com"
             />
         </label>
         <br />
