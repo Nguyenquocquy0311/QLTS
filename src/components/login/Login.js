@@ -2,26 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (email === '') {
-        setErrorMessage('Please enter an email address');
+    //check user
+    if (username === '') {
+        setErrorMessage('Please enter a username !');
         alert(errorMessage);
         return;
-    } else {
-        const re = /\S+@\S+\.\S+/;
-        if (!re.test(email)) {
-            setErrorMessage('Wrong email format !');
-            alert(errorMessage);
-            return;
-        }
-    }
+    } 
   
+    // Check pass
     if (password === '') {
         setErrorMessage('Please enter a password');
         alert(errorMessage);
@@ -34,7 +29,7 @@ const Login = () => {
 
     axios
         .post("/api/login", {
-            email: email,
+            username: username,
             password: password,
         })
         .then((response) => {
@@ -43,18 +38,18 @@ const Login = () => {
         .catch((error) => {
             console.log(error);
         });
-        console.log("email:" + email + ", password:" + password);
+        console.log("username:" + username + ", password:" + password);
     };
 
   return (
     <form onSubmit={onSubmit}>
         <h3>Login Form</h3>
         <label>
-            Email:
+            Username:
             <input
                 type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 placeholder="abc@gmail.com"
             />
         </label>
